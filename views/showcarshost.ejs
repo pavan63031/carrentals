@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Listings</title>
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+  <%- include('partials/nav') %>
+
+  <h1 class="title">Available Cars for Rent</h1>
+
+  <div class="car-container">
+    <% carsarray.forEach((obj) => { %>
+      <div class="car-card">
+        <img src="<%= obj.image %>" alt="<%= obj.name %>" class="car-img"/>
+        <div class="car-details">
+          <h2><%= obj.name %></h2>
+          <p><strong>Price:</strong> ₹<%= obj.price %></p>
+          <p><strong>Seats:</strong> <%= obj.seats %></p>
+          <p><strong>Location:</strong> <%= obj.address %></p>
+
+          <!-- Buttons inside the card -->
+          <div class="card-buttons">
+            <!-- <form action="/edit/<%= obj.id %>?editing=true" method="post">
+              <button class="btn edit-btn">Edit</button>
+            </form> -->
+            <a href="/edit/<%= obj.id %>?editing=true"  class="btn delete-btn"> Edit</a>
+            <form action="/delete/<%= obj.id %>" method="post">
+              <button class="btn delete-btn">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Car Details</title>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333;">
+
+  <%- include('partials/nav') %>
+
+  <h2 style="text-align: center; margin-bottom: 30px;"><%= editing ? "Edit": "Register"%> a car</h2>
+
+  <div style="max-width: 600px; margin: 40px auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; margin-bottom: 30px;">Add Car Details</h2>
+
+    <form action="/<%= editing ? 'edit' :'submitdetails' %>" method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 15px;">
+     <input type="hidden" name="id" value="<%= editing ? car.id : Math.floor(Math.random() * 1000) %>">
+
+      <label style="font-weight: bold;">Car Name</label>
+      <input type="text" name="name" value = "<%= editing ? car.name: ''%>" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+
+      <label style="font-weight: bold;">Price</label>
+      <input type="number" name="price" value = "<%= editing ? car.price: ''%>" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+
+      <label style="font-weight: bold;">Address</label>
+      <input type="text" name="address" value = "<%= editing ? car.address: ''%>" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+ 
+      <label style="font-weight: bold;">No. Of Seats</label>
+      <input type="number" name="seats" value = "<%= editing ? car.seats: ''%>" min="1" max="8" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+
+      <label style="font-weight: bold;">Upload Photos</label>
+      <input type="file" name="image" multiple accept="image/jpg image/jpeg image/png" value = "<%= editing ? car.image: ''%>" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+
+      <input type="submit" value=<%= editing ? 'Update' : 'Submit' %> style="padding: 12px; background-color: #28a745; color: white; font-weight: bold; border: none; border-radius: 5px; cursor: pointer;">
+    </form>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

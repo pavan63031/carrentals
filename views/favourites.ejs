@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Favourites</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <%- include('partials/nav')  %>
+  <h1 style='align-self: center;'>Your Favourite Cars</h1>
+
+  <div class="car-container">
+    <% favourites.forEach((car) => { %>
+      <div class="car-card">
+        <img src="<%= car.image %>" class="car-img" />
+        <div class="car-details">
+          <h2><%= car.name %></h2>
+          <p>₹<%= car.price %></p>
+          <p><%= car.address %></p>
+          <p>Seats: <%= car.seats %></p>
+        </div>
+        <a href="/deletefromfavourites/<%= car.id %>">Remove from Favourites</a>
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>

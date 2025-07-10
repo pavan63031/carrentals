@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= car.name %> - Car Details</title>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333;">
+
+  <%- include('partials/nav') %>
+
+  <div style="max-width: 1000px; margin: 40px auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 10px; display: flex; flex-wrap: wrap; gap: 30px;">
+
+    <div style="flex: 1 1 300px; display: flex; justify-content: center; align-items: center;">
+      <img src="<%= car.image %>" alt="<%= car.name %>" style="width: 100%; max-width: 400px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" />
+    </div>
+
+    <div style="flex: 1 1 300px; display: flex; flex-direction: column; justify-content: center;">
+      <h1 style="font-size: 32px; margin-bottom: 20px;"><%= car.name %></h1>
+      <p style="margin-bottom: 10px; font-size: 18px;"><strong>Price per Day:</strong> ₹<%= car.price %></p>
+      <p style="margin-bottom: 10px; font-size: 18px;"><strong>No. of Seats:</strong> <%= car.seats %></p>
+      <p style="margin-bottom: 20px; font-size: 18px;"><strong>Pickup Location:</strong> <%= car.address %></p>
+
+      <form action="/addtofavourites/<%= car.id %>" method="post">
+        <button type="submit" style="padding: 12px 24px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;">
+          Add to Favourites
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
