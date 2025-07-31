@@ -4,30 +4,252 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title><%= car.name %> - Car Details</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .details-wrapper {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .details-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 500px;
+    }
+
+    .image-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .car-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .car-img:hover {
+      transform: scale(1.05);
+    }
+
+    .info-section {
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(168, 237, 234, 0.1), rgba(254, 214, 227, 0.1));
+    }
+
+    .car-title {
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      color: #2d3748;
+      font-weight: 700;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .car-detail {
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+      color: #4a5568;
+      display: flex;
+      align-items: center;
+    }
+
+    .car-detail strong {
+      color: #2d3748;
+      margin-right: 10px;
+      min-width: 140px;
+    }
+
+    .price {
+      color: #38a169;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .fav-btn {
+      padding: 18px 35px;
+      font-size: 18px;
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 30px;
+      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+    }
+
+    .fav-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 968px) {
+      .details-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .image-section {
+        height: 300px;
+      }
+      
+      .info-section {
+        padding: 40px 30px;
+      }
+      
+      .car-title {
+        font-size: 2.4rem;
+        margin-bottom: 25px;
+      }
+      
+      .car-detail {
+        font-size: 1.2rem;
+        margin-bottom: 18px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .details-wrapper {
+        margin: 20px auto;
+        padding: 0 15px;
+      }
+      
+      .details-container {
+        border-radius: 20px;
+      }
+      
+      .image-section {
+        height: 250px;
+      }
+      
+      .info-section {
+        padding: 30px 25px;
+      }
+      
+      .car-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+      
+      .car-detail {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .car-detail strong {
+        margin-bottom: 5px;
+        min-width: auto;
+      }
+      
+      .fav-btn {
+        padding: 15px 25px;
+        font-size: 16px;
+        margin-top: 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .details-wrapper {
+        margin: 15px auto;
+        padding: 0 10px;
+      }
+      
+      .details-container {
+        border-radius: 18px;
+      }
+      
+      .image-section {
+        height: 200px;
+      }
+      
+      .info-section {
+        padding: 25px 20px;
+      }
+      
+      .car-title {
+        font-size: 1.8rem;
+        margin-bottom: 18px;
+      }
+      
+      .car-detail {
+        font-size: 1rem;
+        margin-bottom: 12px;
+      }
+      
+      .fav-btn {
+        padding: 12px 20px;
+        font-size: 15px;
+        margin-top: 20px;
+      }
+    }
+  </style>
 </head>
-<body style="margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333;">
+<body>
 
   <%- include('partials/nav') %>
 
-  <div style="max-width: 1000px; margin: 40px auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 10px; display: flex; flex-wrap: wrap; gap: 30px;">
+  <div class="details-wrapper">
+    <div class="details-container">
+      <div class="image-section">
+        <img src="<%= car.image %>" alt="<%= car.name %>" class="car-img" />
+      </div>
 
-    <div style="flex: 1 1 300px; display: flex; justify-content: center; align-items: center;">
-      <img src="<%= car.image %>" alt="<%= car.name %>" style="width: 100%; max-width: 400px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" />
+      <div class="info-section">
+        <h1 class="car-title"><%= car.name %></h1>
+        
+        <div class="car-detail">
+          <strong>Price per Day:</strong>
+          <span class="price">₹<%= car.price %></span>
+        </div>
+        
+        <div class="car-detail">
+          <strong>Seats:</strong>
+          <span><%= car.seats %> passengers</span>
+        </div>
+        
+        <div class="car-detail">
+          <strong>Pickup Location:</strong>
+          <span><%= car.address %></span>
+        </div>
+
+        <form action="/addtofavourites/<%= car.id %>" method="post">
+          <button type="submit" class="fav-btn">
+            ❤️ Add to Favourites
+          </button>
+        </form>
+      </div>
     </div>
-
-    <div style="flex: 1 1 300px; display: flex; flex-direction: column; justify-content: center;">
-      <h1 style="font-size: 32px; margin-bottom: 20px;"><%= car.name %></h1>
-      <p style="margin-bottom: 10px; font-size: 18px;"><strong>Price per Day:</strong> ₹<%= car.price %></p>
-      <p style="margin-bottom: 10px; font-size: 18px;"><strong>No. of Seats:</strong> <%= car.seats %></p>
-      <p style="margin-bottom: 20px; font-size: 18px;"><strong>Pickup Location:</strong> <%= car.address %></p>
-
-      <form action="/addtofavourites/<%= car.id %>" method="post">
-        <button type="submit" style="padding: 12px 24px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;">
-          Add to Favourites
-        </button>
-      </form>
-    </div>
-
   </div>
 
   <%- include('partials/footer') %>

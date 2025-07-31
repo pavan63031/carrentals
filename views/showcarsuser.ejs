@@ -31,10 +31,140 @@
               </form>
           </div>
           </div>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Listings</title>
+  <link rel="stylesheet" href="home.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      min-height: 100vh;
+    }
+
+    .title {
+      background: linear-gradient(135deg, #2d3748, #4a5568);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+    }
+
+    .car-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .car-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .card-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .card-buttons form {
+      flex: 1;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+      background: none;
+      border-radius: 0;
+    }
+
+    .card-buttons button {
+      width: 100%;
+      padding: 12px 15px;
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .card-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(255, 107, 107, 0.3);
+    }
+
+    .view-btn {
+      display: inline-block;
+      padding: 12px 15px;
+      background: linear-gradient(135deg, #4299e1, #3182ce);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-align: center;
+      font-size: 14px;
+      flex: 1;
+    }
+
+    .view-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(66, 153, 225, 0.3);
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .card-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .card-buttons button,
+      .view-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card-buttons button,
+      .view-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/nav') %>
+
+  <h1 class="title">🚗 Available Cars for Rent</h1>
+
+  <div class="car-container">
+    <% carsarray.forEach((obj, index) => { %>
+      <div class="car-card">
+        <img src="<%= obj.image %>" alt="<%= obj.name %>" class="car-img"/>
+        <div class="car-details">
+          <h2><%= obj.name %></h2>
+          <p><strong>Price:</strong> ₹<%= obj.price %>/day</p>
+          <p><strong>Seats:</strong> <%= obj.seats %> passengers</p>
+          <p><strong>Location:</strong> <%= obj.address %></p>
+
+          <div class="card-buttons">
+            <form action="/addtofavourites/<%= obj.id %>" method="post">
+              <button type="submit">❤️ Add to Favourites</button>
+            </form>
+            <a href="/viewdetails/<%= obj.id %>" class="view-btn">👁️ View Details</a>
+          </div>
       </div>
     <% }) %>
   </div>
+
+  <%- include('partials/footer') %>
 
   <%- include('partials/footer') %>
 </body>

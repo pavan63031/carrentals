@@ -3,20 +3,176 @@
 <head>
   <title>Favourites</title>
   <link rel="stylesheet" href="home.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      min-height: 100vh;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 3rem;
+      margin: 40px 0;
+      color: #2d3748;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .favourites-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      margin: 40px auto;
+      max-width: 500px;
+    }
+
+    .empty-state h2 {
+      font-size: 2rem;
+      color: #4a5568;
+      margin-bottom: 15px;
+    }
+
+    .empty-state p {
+      font-size: 1.1rem;
+      color: #718096;
+      margin-bottom: 25px;
+    }
+
+    .browse-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      color: #2d3748;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(252, 182, 159, 0.3);
+    }
+
+    .browse-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(252, 182, 159, 0.4);
+    }
+
+    .car-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .remove-btn {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+    .remove-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(255, 107, 107, 0.3);
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .page-title {
+        font-size: 2.5rem;
+        margin: 30px 15px;
+      }
+      
+      .favourites-container {
+        padding: 0 15px;
+      }
+      
+      .empty-state {
+        margin: 30px 15px;
+        padding: 60px 20px;
+      }
+      
+      .empty-state h2 {
+        font-size: 1.8rem;
+      }
+      
+      .empty-state p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-title {
+        font-size: 2rem;
+        margin: 20px 10px;
+      }
+      
+      .favourites-container {
+        padding: 0 10px;
+      }
+      
+      .empty-state {
+        margin: 20px 10px;
+        padding: 40px 15px;
+      }
+      
+      .empty-state h2 {
+        font-size: 1.6rem;
+      }
+      
+      .browse-btn {
+        padding: 12px 25px;
+        font-size: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
   <%- include('partials/nav')  %>
-  <h1 style='align-self: center;'>Your Favourite Cars</h1>
+  
+  <div class="favourites-container">
+    <h1 class="page-title">❤️ Your Favourite Cars</h1>
 
-  <div class="car-container">
-    <% favourites.forEach((car) => { %>
-      <div class="car-card">
-        <img src="<%= car.image %>" class="car-img" />
-        <div class="car-details">
-          <h2><%= car.name %></h2>
-          <p>₹<%= car.price %></p>
-          <p><%= car.address %></p>
-          <p>Seats: <%= car.seats %></p>
+    <% if (favourites && favourites.length > 0) { %>
+      <div class="car-container">
+        <% favourites.forEach((car) => { %>
+          <div class="car-card">
+            <img src="<%= car.image %>" class="car-img" />
+            <div class="car-details">
+              <h2><%= car.name %></h2>
+              <p><strong>Price:</strong> ₹<%= car.price %>/day</p>
+              <p><strong>Location:</strong> <%= car.address %></p>
+              <p><strong>Seats:</strong> <%= car.seats %> passengers</p>
+              <a href="/deletefromfavourites/<%= car.id %>" class="remove-btn">
+                🗑️ Remove from Favourites
+              </a>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty-state">
+        <h2>No Favourites Yet</h2>
+        <p>You haven't added any cars to your favourites. Start browsing to find your perfect ride!</p>
+        <a href="/cars" class="browse-btn">Browse Cars</a>
+      </div>
+    <% } %>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
         </div>
         <a href="/deletefromfavourites/<%= car.id %>">Remove from Favourites</a>
       </div>
