@@ -15,21 +15,23 @@ body {
 header {
   background-color: #1f2937;
   color: white;
-  padding: 20px 40px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 25px;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 nav a {
@@ -37,6 +39,7 @@ nav a {
   color: white;
   font-weight: 500;
   transition: color 0.3s;
+  font-size: 0.9rem;
 }
 
 nav a:hover {
@@ -45,28 +48,31 @@ nav a:hover {
 
 /* Hero Section */
 .hero {
-  height: 80vh;
+  height: 70vh;
+  min-height: 400px;
   background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70') no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+  padding: 20px;
 }
 
 .hero-content {
   text-align: center;
-  max-width: 600px;
+  max-width: 90%;
 }
 
 .hero h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: 15px;
 }
 
 .hero p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
+  font-size: 1rem;
+  margin-bottom: 25px;
+  line-height: 1.5;
 }
 
 .btn {
@@ -77,6 +83,7 @@ nav a:hover {
   border-radius: 5px;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+  display: inline-block;
 }
 
 .btn:hover {
@@ -85,26 +92,31 @@ nav a:hover {
 
 /* Features */
 .features {
-  padding: 60px 40px;
+  padding: 40px 20px;
   display: flex;
   justify-content: space-around;
   background-color: #fff;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 .feature {
   text-align: center;
   max-width: 250px;
+  flex: 1;
+  min-width: 200px;
 }
 
 .feature h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 10px;
   color: #0f172a;
 }
 
 .feature p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #555;
+  line-height: 1.5;
 }
 
 /* Footer */
@@ -112,16 +124,16 @@ footer {
   background-color: #1f2937;
   color: white;
   text-align: center;
-  padding: 20px 0;
+  padding: 20px;
   margin-top: 40px;
 }
 
-
 /* Form Container */
 form {
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 30px;
+  max-width: 90%;
+  width: 500px;
+  margin: 30px auto;
+  padding: 25px;
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -136,13 +148,17 @@ form label {
 }
 
 form input[type="text"],
-form input[type="number"] {
+form input[type="number"],
+form input[type="email"],
+form input[type="password"],
+form input[type="file"] {
   width: 100%;
   padding: 10px 12px;
   margin-bottom: 20px;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
   transition: border-color 0.3s ease;
+  font-size: 16px; /* Prevents zoom on iOS */
 }
 
 form input:focus {
@@ -151,7 +167,8 @@ form input:focus {
 }
 
 /* Submit Button */
-form input[type="submit"] {
+form input[type="submit"],
+form button {
   background-color: #3b82f6;
   color: white;
   border: none;
@@ -159,28 +176,31 @@ form input[type="submit"] {
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100%;
+  font-size: 16px;
 }
 
-form input[type="submit"]:hover {
+form input[type="submit"]:hover,
+form button:hover {
   background-color: #2563eb;
 }
-/* Global Reset & Font */
-
 
 /* Title */
 .title {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 40px;
+  font-size: 2rem;
+  margin: 30px 20px;
   color: #1f2937;
 }
 
 /* Car Container */
 .car-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Car Card */
@@ -189,8 +209,8 @@ form input[type="submit"]:hover {
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   overflow: hidden;
-  width: 280px;
   transition: transform 0.3s;
+  width: 100%;
 }
 
 .car-card:hover {
@@ -200,7 +220,7 @@ form input[type="submit"]:hover {
 /* Car Image */
 .car-img {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
 }
 
@@ -210,35 +230,41 @@ form input[type="submit"]:hover {
 }
 
 .car-details h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 10px;
   color: #111827;
 }
 
 .car-details p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin: 6px 0;
   color: #374151;
 }
+
 .card-buttons {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
   margin-top: 20px;
 }
 
 .card-buttons form {
-  flex: 1;
-  margin: 0 5px;
+  margin: 0;
 }
 
-.btn {
+.card-buttons .btn,
+.card-buttons button,
+.card-buttons a {
   width: 100%;
   padding: 10px;
   border: none;
   border-radius: 6px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
 }
 
 /* Specific Button Styles */
@@ -258,4 +284,214 @@ form input[type="submit"]:hover {
 
 .details-btn:hover {
   background-color: #2563eb;
+}
+
+.edit-btn {
+  background-color: #10b981;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #059669;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Media Queries for Responsive Design */
+
+/* Tablet Styles */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .logo {
+    font-size: 1.3rem;
+  }
+  
+  nav ul {
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  nav a {
+    font-size: 0.85rem;
+  }
+  
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .hero p {
+    font-size: 0.95rem;
+  }
+  
+  .features {
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    margin: 25px 15px;
+  }
+  
+  .car-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0 15px;
+  }
+  
+  .card-buttons {
+    flex-direction: row;
+    gap: 8px;
+  }
+  
+  .card-buttons .btn,
+  .card-buttons button,
+  .card-buttons a {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 480px) {
+  header {
+    padding: 10px 15px;
+  }
+  
+  .logo {
+    font-size: 1.2rem;
+  }
+  
+  nav ul {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  nav a {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+  
+  .hero {
+    height: 60vh;
+    min-height: 350px;
+    padding: 15px;
+  }
+  
+  .hero h1 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  
+  .hero p {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .features {
+    padding: 25px 15px;
+    gap: 20px;
+  }
+  
+  .feature {
+    min-width: 100%;
+  }
+  
+  .feature h2 {
+    font-size: 1.2rem;
+  }
+  
+  .feature p {
+    font-size: 0.9rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    margin: 20px 10px;
+  }
+  
+  .car-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 0 10px;
+  }
+  
+  .car-details {
+    padding: 15px;
+  }
+  
+  .car-details h2 {
+    font-size: 1.2rem;
+  }
+  
+  .car-details p {
+    font-size: 0.9rem;
+  }
+  
+  .card-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .card-buttons .btn,
+  .card-buttons button,
+  .card-buttons a {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+  
+  form {
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  footer {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 320px) {
+  .hero h1 {
+    font-size: 1.3rem;
+  }
+  
+  .hero p {
+    font-size: 0.85rem;
+  }
+  
+  .title {
+    font-size: 1.3rem;
+  }
+  
+  .car-details {
+    padding: 12px;
+  }
+  
+  .car-details h2 {
+    font-size: 1.1rem;
+  }
+  
+  .car-details p {
+    font-size: 0.85rem;
+  }
 }
